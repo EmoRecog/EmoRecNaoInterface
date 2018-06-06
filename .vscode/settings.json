@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/home/srp3003/.conda/envs/py2-nao/bin/python",
+    "python.linting.flake8Enabled": false
+}
