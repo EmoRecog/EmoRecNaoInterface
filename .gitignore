@@ -9,8 +9,10 @@
 !.vscode/extensions.json
 .history
 
-
 # End of https://www.gitignore.io/api/visualstudiocode
+
+# stream images
+*.jpg
 
 # Backups
 *~
