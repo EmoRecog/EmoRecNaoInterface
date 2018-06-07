@@ -33,12 +33,12 @@ def main():
         args.P):
         
         naoIP = args.nIP
-        naoPort = args.nP
+        naoPort = int(args.nP)
         # naoIP = '172.16.138.31'
         # naoPort = 9559
 
         procIP = args.IP
-        procPort = args.P
+        procPort = int(args.P)
         # procIP = '127.0.0.1'
         # procPort = 4096
 
@@ -78,15 +78,15 @@ def main():
             # for testing, use webcam feed
             # send every third frame
             # ensures that prev frame is read by receiver
-            s = socket(AF_INET, SOCK_DGRAM)
-            f = open("streamImg.jpg", "rb")
-            data = f.read(1024)
-            while data:
-                if(s.sendto(data, addr)):
-                    data = f.read(1024)
-            f.close()
-            s.close()
-            
+	            s = socket(AF_INET, SOCK_DGRAM)
+	            f = open("streamImg.jpg", "rb")
+	            data = f.read(1024)
+	            while data:
+	                if(s.sendto(data, addr)):
+	                    data = f.read(1024)
+	            f.close()
+	            s.close()
+	            
             cv2.imshow('sender',frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break        
