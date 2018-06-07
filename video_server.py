@@ -10,7 +10,7 @@ import numpy as np
 
 import argparse
 
-# from naoqi import ALProxy
+from naoqi import ALProxy
 import random
 
 class FrameRetriever(threading.Thread):
@@ -60,7 +60,7 @@ class FrameRetriever(threading.Thread):
                 frame[:,:,0],frame[:,:,2] = temp[:,:,2],temp[:,:,0]
 
                 # write object to Queue
-                self.frameQueue.put(frame)
+                self.frameQueue.put_nowait(frame)
                 
                 cv2.imshow('frame',frame)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -73,8 +73,8 @@ class FrameRetriever(threading.Thread):
             print("NAO video stream closed")
 
 class FrameDispatcher(threading.Thread):
-    # def __init__(self, procIP, procPort, frameQueue):
-    def __init__(self, procIP, procPort):
+    def __init__(self, procIP, procPort, frameQueue):
+    # def __init__(self, procIP, procPort):
 
         '''
         should read frames from queue
@@ -83,7 +83,7 @@ class FrameDispatcher(threading.Thread):
         threading.Thread.__init__(self)
         self.procIP = procIP
         self.procPort = procPort
-        # self.frameQueue = frameQueue
+        self.frameQueue = frameQueue
 
     def run(self):
         
